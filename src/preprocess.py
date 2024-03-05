@@ -1,4 +1,5 @@
 import pandas as pd
+from scipy import stats
 
 
 
@@ -18,7 +19,6 @@ def rename_columns(df, column_names):
     return df
 
 
-import pandas as pd
 
 def convert_gender_to_numeric(df, column_name='Gender'):
     """
@@ -37,6 +37,23 @@ def convert_gender_to_numeric(df, column_name='Gender'):
     else:
         print(f"Column '{column_name}' not found in DataFrame.")
     return df
+
+
+def remove_outliers_z_score(df, threshold=3):
+    """
+    Removes rows containing outliers based on the Z-score method.
+
+    Parameters:
+    - df: DataFrame to process, should contain only numerical columns for Z-score calculation.
+    - threshold: Z-score value to use as the threshold for defining an outlier.
+
+    Returns:
+    - DataFrame with outliers removed.
+    """
+    z_scores = stats.zscore(df.select_dtypes(include=[float, int]))
+    abs_z_scores = abs(z_scores)
+    filtered_entries = (abs_z_scores < threshold).all(axis=1)
+    return df[filtered_entries]
 
 
 
