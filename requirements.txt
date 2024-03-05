@@ -1,3 +1,6 @@
 openml
 scipy
-pandas 
+pandas
+matplotlib
+seaborn
+sklearn
