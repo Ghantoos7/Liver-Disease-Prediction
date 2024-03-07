@@ -16,3 +16,6 @@ def download_openml_dataset(dataset_id):
 
     return df
 
+
+print("hello")
+
