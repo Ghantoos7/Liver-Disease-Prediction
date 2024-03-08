@@ -10,7 +10,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 sys.path.append('src')
 
-df = pd.read_csv('/liver_disease_preprocessed.csv')  
+df = pd.read_csv('/data/liver_disease_preprocessed.csv')  
 
 x = df.drop("Class", axis=1)
 y = df["Class"]
