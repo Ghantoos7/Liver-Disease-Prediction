@@ -87,7 +87,7 @@ def svm_model(x_train_param, x_test_param, y_train_param, y_test_param):
     y_pred = best_svm_model.predict(X_test_scaled)
 
     accuracy = accuracy_score(y_test_param, y_pred)
-    print("SVM model accuracy (in%):", accuracy*100)
+    print("SVM model accuracy (in %):", accuracy*100)
     print(classification_report(y_test_param, y_pred))
 
     precision = precision_score(y_test_param, y_pred)
