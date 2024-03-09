@@ -35,7 +35,7 @@ def logisticRegression(x_train_param, x_test_param, y_train_param, y_test_param)
     return [acc, precision, recall, f1]
 
 def knn_model(x_train_param, x_test_param, y_train_param, y_test_param):
-    knn = KNeighborsClassifier(n_neighbors=75)
+    knn = KNeighborsClassifier(n_neighbors=70)
     knn.fit(x_train_param, y_train_param)
     y_pred= knn.predict(x_test_param)
     acc = accuracy_score(y_test_param, y_pred)
@@ -68,7 +68,7 @@ def svm_model(x_train_param, x_test_param, y_train_param, y_test_param):
     X_test_scaled = scaler.transform(x_test_param)
 
     param_grid = {
-        'C': [0.1, 1, 10, 100], 
+        'C': [0.1, 1, 5, 7, 10], 
         'kernel': ['linear', 'rbf'],
         'gamma': ['scale', 'auto'],  
         'class_weight': [None, 'balanced'] 
