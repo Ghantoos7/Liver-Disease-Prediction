@@ -1,5 +1,6 @@
 import pandas as pd
 from scipy import stats
+import numpy as np
 
 
 
@@ -39,9 +40,11 @@ def convert_gender_to_numeric(df, column_name='Gender'):
     return df
 
 
+from scipy import stats
+
 def remove_outliers_z_score(df, threshold=3):
     """
-    Removes rows containing outliers based on the Z-score method.
+    Removes rows containing outliers based on the Z-score method and returns the number of outliers.
 
     Parameters:
     - df: DataFrame to process, should contain only numerical columns for Z-score calculation.
@@ -49,11 +52,18 @@ def remove_outliers_z_score(df, threshold=3):
 
     Returns:
     - DataFrame with outliers removed.
+    - Number of outliers removed.
     """
     z_scores = stats.zscore(df.select_dtypes(include=[float, int]))
-    abs_z_scores = abs(z_scores)
+    abs_z_scores = np.abs(z_scores)
+
     filtered_entries = (abs_z_scores < threshold).all(axis=1)
-    return df[filtered_entries]
+    num_outliers = df.shape[0] - sum(filtered_entries)
+
+    cleaned_df = df[filtered_entries]
+
+    return cleaned_df, num_outliers
+
 
 
 
